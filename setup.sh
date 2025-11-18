@@ -27,7 +27,7 @@ modsecurity()
   sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/main.conf -O /etc/modsecurity/main.conf
 
   # See: https://coreruleset.org/docs/6-development/6-5-testing-the-rule-set/
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/dev.conf -O tee /etc/modsecurity/dev.conf
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/dev.conf -O /etc/modsecurity/dev.conf
 
   # Configure ModSecurity
   sudo sed -i -E "s/SecRuleEngine.*/SecRuleEngine On/" /etc/modsecurity/modsecurity.conf
