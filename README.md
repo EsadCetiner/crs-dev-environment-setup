@@ -1,6 +1,6 @@
 # crs-dev-environment-setup
 
-This script sets up a dev environment ready with all the tools needed for developing anything CRS related. It's meant to be run on a non-production dev environment without any existing Apache/NGINX/ModSecurity config. 
+This script sets up a dev environment ready with all the tools needed for developing anything CRS related. It's meant to be run on a non-production dev environment without any existing Apache/NGINX/ModSecurity config. The script is idempotent so it can be ran multiple times and in the future for updated configs.
 
 This has only been tested on Ubuntu 24.04 so this script might not work for other distros.
 
