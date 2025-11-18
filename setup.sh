@@ -12,7 +12,7 @@ modsecurity()
   echo "deb http://modsecurity.digitalwave.hu/ubuntu/ $(lsb_release -sc)-backports main" | sudo tee /etc/apt/sources.list.d/dwmodsec.list
 
   # Prefer digitalwave repository for modsec
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/apt/99modsecurity -O /etc/apt/preferences.d/99modsecurity
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/apt/99modsecurity -O /etc/apt/preferences.d/99modsecurity
 
   sudo apt update
 
@@ -24,10 +24,10 @@ modsecurity()
 
   sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/modsecurity/main.conf -O /etc/modsecurity/main.conf
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/main.conf -O /etc/modsecurity/main.conf
 
   # See: https://coreruleset.org/docs/6-development/6-5-testing-the-rule-set/
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/modsecurity/dev.conf -O tee /etc/modsecurity/dev.conf
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/dev.conf -O tee /etc/modsecurity/dev.conf
 
   # Configure ModSecurity
   sudo sed -i -E "s/SecRuleEngine.*/SecRuleEngine On/" /etc/modsecurity/modsecurity.conf
@@ -43,8 +43,8 @@ modsecurity()
 nginx()
 {
 
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/nginx/default -O /etc/nginx/sites-enabled/default
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/nginx/modsecurity.conf -O /etc/nginx/conf.d/modsecurity.conf
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/nginx/default -O /etc/nginx/sites-enabled/default
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/nginx/modsecurity.conf -O /etc/nginx/conf.d/modsecurity.conf
   sudo systemctl disable nginx --now
 
 }
@@ -54,8 +54,8 @@ httpd()
 
   sudo a2enmod proxy proxy_http
 
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/httpd/security.conf -O /etc/apache2/mods-enabled/security2.conf
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/httpd/security.conf -O /etc/apache2/sites-enabled/000-default.conf
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/httpd/security.conf -O /etc/apache2/mods-enabled/security2.conf
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/httpd/security.conf -O /etc/apache2/sites-enabled/000-default.conf
 
   sudo systemctl disable apache2 --now
 
@@ -79,11 +79,11 @@ crs_tools()
   sudo dpkg -i "$tmp_dir/albedo-latest.deb"
  
   # ftw config
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/ftw/.ftw.apache.yaml -O /etc/modsecurity/.ftw.apache.yaml
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/ftw/.ftw.nginx.yaml -O /etc/modsecurity/.ftw.nginx.yaml
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/ftw/.ftw.apache.yaml -O /etc/modsecurity/.ftw.apache.yaml
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/ftw/.ftw.nginx.yaml -O /etc/modsecurity/.ftw.nginx.yaml
 
   # Albedo systemd config
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/albedo/albedo.service -O /etc/systemd/system/albedo.service
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/albedo/albedo.service -O /etc/systemd/system/albedo.service
   sudo systemctl daemon-reload
   sudo systemctl disable albedo --now
 
