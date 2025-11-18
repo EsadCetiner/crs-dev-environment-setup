@@ -54,9 +54,8 @@ httpd()
 
   sudo a2enmod proxy proxy_http
 
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/httpd/security.conf -O /etc/apache2/mods-enabled/security2.conf
-  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/httpd/security.conf -O /etc/apache2/sites-enabled/000-default.conf
-
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/httpd/security2.conf -O /etc/apache2/mods-enabled/security2.conf
+  sudo wget https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/httpd/000-default.conf -O /etc/apache2/sites-enabled/000-default.conf
   sudo systemctl disable apache2 --now
 
 }
