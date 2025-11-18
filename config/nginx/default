@@ -1,0 +1,30 @@
+server
+{
+    listen 8080 default_server;
+    listen [::]:8080 default_server;
+    server_name _;
+
+    root /var/www/html/;
+    index index.html;
+
+    location /reflect
+    {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header Proxy "";
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_http_version 1.1;
+        proxy_buffering off;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 36000s;
+        proxy_redirect off;
+
+        proxy_pass_header Authorization;
+    }
+
+    error_log /var/log/nginx/error.log info;
+}

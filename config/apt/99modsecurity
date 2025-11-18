@@ -1,0 +1,15 @@
+Package: *libnginx-mod-http-modsecurity*
+Pin: origin modsecurity.digitalwave.hu
+Pin-Priority: 900
+
+Package: *libapache2-mod-security2*
+Pin: origin modsecurity.digitalwave.hu
+Pin-Priority: 900
+
+Package: *modsecurity-crs*
+Pin: origin modsecurity.digitalwave.hu
+Pin-Priority: 900
+
+Package: *libmodsecurity*
+Pin: origin modsecurity.digitalwave.hu
+Pin-Priority: 900

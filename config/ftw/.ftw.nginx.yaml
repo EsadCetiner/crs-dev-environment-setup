@@ -1,0 +1,6 @@
+logfile: /var/log/nginx/error.log
+logmarkerheadername: X-CRS-TEST
+testoverride:
+  input:
+    dest_addr: "127.0.0.1"
+    port: 8080

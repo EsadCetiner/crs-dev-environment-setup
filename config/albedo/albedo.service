@@ -1,0 +1,11 @@
+[Unit]
+Description=Albedo is a simple HTTP server used as a reverse-proxy backend in testing web application firewalls (WAFs).
+Documentation=https://github.com/coreruleset/albedo
+ConditionFileIsExecutable=/usr/bin/albedo
+
+[Service]
+ExecStart=/usr/bin/albedo -p 8000 -b localhost
+DynamicUser=true
+
+[Install]
+WantedBy=apache2.service nginx.service
