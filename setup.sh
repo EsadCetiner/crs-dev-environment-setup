@@ -5,6 +5,7 @@ trap 'echo "Error on line $LINENO with command: $BASH_COMMAND"; exit 1' ERR
 
 modsecurity()
 {
+
   # See: https://modsecurity.digitalwave.hu/
   sudo apt update -q
   sudo apt-get -y -q install apt-transport-https lsb-release ca-certificates curl
@@ -22,21 +23,9 @@ modsecurity()
   sudo apt install -y -q --no-install-recommends nginx libnginx-mod-http-modsecurity
   sudo systemctl disable nginx --now
 
-  sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-
   sudo wget -q https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/main.conf -O /etc/modsecurity/main.conf
-
-  # See: https://coreruleset.org/docs/6-development/6-5-testing-the-rule-set/
+  sudo wget -q https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/modsecurity.conf -O /etc/modsecurity/modsecurity.conf
   sudo wget -q https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/modsecurity/dev.conf -O /etc/modsecurity/dev.conf
-
-  # Configure ModSecurity
-  sudo sed -i -E "s/SecRuleEngine.*/SecRuleEngine On/" /etc/modsecurity/modsecurity.conf
-  sudo sed -i "s#/var/log/apache2/modsec_audit.log#/var/log/modsec_audit.log#" /etc/modsecurity/modsecurity.conf
-  sudo sed -i -E "s#^SecResponseBodyMimeType.*#SecResponseBodyMimeType text/plain text/html text/xml application/json#" /etc/modsecurity/modsecurity.conf
-  sudo sed -i "/SecRequestBodyInMemoryLimit/d" /etc/modsecurity/modsecurity.conf
-
-  # See: https://github.com/owasp-modsecurity/modsecurity/issues/3109
-  sudo sed -i -E "s/SecAuditLogParts .*/SecAuditLogParts ABCDEFHIJZ/" /etc/modsecurity/modsecurity.conf
 
 }
 
