@@ -7,7 +7,7 @@ modsecurity()
 {
 
   # Install binaries
-  sudo dnf install -y httpd mod_security.x86_64 nginx nginx-mod-modsecurity.x86_64
+  sudo dnf install -y -q httpd mod_security.x86_64 nginx nginx-mod-modsecurity.x86_64
   sudo systemctl disable httpd nginx --now
 
   # Download configs
