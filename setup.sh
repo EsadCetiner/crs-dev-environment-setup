@@ -18,7 +18,7 @@ modsecurity()
   sudo apt update
 
   # Make sure both Apache and NGINX is disabled to avoid errors
-  sudo apt install -y -q --no-install-recommends apache2 libapache2-mod-security2
+  sudo apt install -y -q --no-install-recommends apache2 libapache2-mod-security2 jq
   sudo systemctl disable apache2 --now
   sudo apt install -y -q --no-install-recommends nginx libnginx-mod-http-modsecurity
   sudo systemctl disable nginx --now
