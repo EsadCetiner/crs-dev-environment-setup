@@ -64,6 +64,10 @@ crs_tools()
   sudo systemctl daemon-reload
   sudo systemctl disable albedo --now
 
+  sudo mkdir -p /etc/modsecurity/bin/
+  sudo wget -q https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/bin/generate-template-tests.sh -O /etc/modsecurity/bin/generate-template-tests.sh
+  sudo chmod 0755 /etc/modsecurity/bin/generate-template-tests.sh
+
 }
 
 main()

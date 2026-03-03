@@ -16,3 +16,7 @@ curl -s https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/
 ```
 curl -s https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/setup-fedora.sh | bash
 ```
+
+## generate-template-tests.sh
+
+A helper script is also shipped with this setup script which helps you generate new boilerplate tests. This is useful if you've written multiple new SecLang rules and you need to add tests for them, this is tedious to do manually. It can be found in `/etc/modsecurity/bin/`.
