@@ -11,11 +11,12 @@ help()
 cat << EOF
 generate-template-tests.sh: Generates boilerplate tests for new SecLang rules
 Usage:
-Syntax: generate-template-tests.sh [/path/to/seclang-rules/]
+Syntax: generate-template-tests.sh -p [/path/to/seclang-rules/]
 
 options:
   -h, --help    Displays this help menu
-  -p, --path    The path to the SecLang rules
+  -p, --path    The path to the SecLang rules (Required)
+  -a, --author  Specifies the Author to add in tests.
 EOF
 
 }
@@ -37,6 +38,16 @@ parse_args()
             -p|--path)
                 if [[ -n "$2" ]]; then
                     rules_path="$2"
+                    shift 2
+                else
+                    echo "error: Argument for option -p/--path is missing."
+                    help
+                    exit 1
+                fi
+                ;;
+            -a|--author)
+                if [[ -n "$2" ]]; then
+                    test_author="$2"
                     shift 2
                 else
                     echo "error: Argument for option -p/--path is missing."
@@ -76,7 +87,7 @@ generate_templates()
             cat <<EOF > "$rules_path/tests/regression/$tests_folder/$i.yaml"
 ---
 meta:
-  author: "FIXME"
+  author: "$test_author"
   description: "FIXME"
 rule_id: $i
 tests:
