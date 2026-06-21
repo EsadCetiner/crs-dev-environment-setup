@@ -68,6 +68,11 @@ crs_tools()
   sudo wget -q https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/bin/generate-template-tests.sh -O /etc/modsecurity/bin/generate-template-tests.sh
   sudo chmod 0755 /etc/modsecurity/bin/generate-template-tests.sh
 
+  # regexploit to test for ReDoS
+  sudo apt install -y pipx
+  pipx ensurepath
+  pipx install regexploit
+
 }
 
 main()
