@@ -2,18 +2,24 @@
 
 set -eEuo pipefail
 trap 'echo "Error on line $LINENO with command: $BASH_COMMAND"; exit 1' ERR
+distro_id=$(lsb_release -a | grep -oE "Distributor ID:.+" | sed -E "s/Distributor ID:\s+//")
 
 modsecurity()
 {
 
+  # Digitwave's repository only supports Ubuntu/Debian.
   # See: https://modsecurity.digitalwave.hu/
-  sudo apt update -q
-  sudo apt-get -y -q install apt-transport-https lsb-release ca-certificates curl
-  sudo wget -q https://modsecurity.digitalwave.hu/dwmodsec.gpg -O /etc/apt/trusted.gpg.d/modsecurity-digitalwave.gpg
-  echo "deb http://modsecurity.digitalwave.hu/ubuntu/ $(lsb_release -sc)-backports main" | sudo tee /etc/apt/sources.list.d/dwmodsec.list
+  if [[ "$distro_id" = "Ubuntu" || "$distro_id" = "Debian" ]];then
+    sudo apt update -q
+    sudo apt-get -y -q install apt-transport-https lsb-release ca-certificates curl
+    sudo wget -q https://modsecurity.digitalwave.hu/dwmodsec.gpg -O /etc/apt/trusted.gpg.d/modsecurity-digitalwave.gpg
+    echo "deb http://modsecurity.digitalwave.hu/ubuntu/ $(lsb_release -sc)-backports main" | sudo tee /etc/apt/sources.list.d/dwmodsec.list
 
-  # Prefer digitalwave repository for modsec
-  sudo wget -q https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/apt/99modsecurity -O /etc/apt/preferences.d/99modsecurity
+    # Prefer digitalwave repository for modsec
+    sudo wget -q https://raw.githubusercontent.com/EsadCetiner/crs-dev-environment-setup/refs/heads/main/config/apt/99modsecurity -O /etc/apt/preferences.d/99modsecurity
+  else
+    echo "Warning: Skipped installation of Digitalwave ModSecurity repository, an outdated version of ModSecurity will be installed!"
+  fi
 
   sudo apt update
 
